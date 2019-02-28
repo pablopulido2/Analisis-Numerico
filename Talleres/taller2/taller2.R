@@ -224,7 +224,9 @@ holi = Q %*% R
 print (holi)
 
 #PUNTO 7
+
 #7A
+
 punto7 = function(x) {
   n = length(x)
   F = rep(NA, n)
@@ -237,25 +239,36 @@ sol = BBsolve(par=p0, fn=punto7)
 sol$par
 
 plot(sol$par)
-plot(ecuaciones)
+plot(punto7)
+
 #7B
+
+ #definicion funcion trigexp con parametro x(matriz)
 trigexp = function(x) {
-n = length(x)
-F = rep(NA, n)
-F[1] = 3*x[1]^2 + 2*x[2] - 5 + sin(x[1] - x[2]) * sin(x[1] + x[2])
+
+n = length(x)#se obtiene el tamaño de la matriz x 
+F = rep(NA, n)#se crea un vector de tamaño n vacio 
+F[1] = 3*x[1]^2 + 2*x[2] - 5 + sin(x[1] - x[2]) * sin(x[1] + x[2]) #se almacenan las ecuaciones del sistema de 2x2
 tn1 = 2:(n-1)
 F[tn1] = -x[tn1-1] * exp(x[tn1-1] - x[tn1]) + x[tn1] *
 ( 4 + 3*x[tn1]^2) + 2 * x[tn1 + 1] + sin(x[tn1] -
-x[tn1 + 1]) * sin(x[tn1] + x[tn1 + 1]) - 8
-F[n] = -x[n-1] * exp(x[n-1] - x[n]) + 4*x[n] - 3
+x[tn1 + 1]) * sin(x[tn1] + x[tn1 + 1]) - 8 # evaluar las ecuaciones tn1 veces
+F[n] = -x[n-1] * exp(x[n-1] - x[n]) + 4*x[n] - 3 #evualuar la ultima ecuacion n
 F
 }
 n = 10000
 p0 = runif(n) # n initial random starting guesses
-sol = BBsolve(par=p0, fn=trigexp)
+sol = BBsolve(par=p0, fn=trigexp) #se soluciona el sistema de ecuaciones "trigexp" usando el metodo BBsolve, con n valores iniciales
 sol$par
 
 #8
+A <- matrix(c(4,6,0,
+              -1, 4, 6,
+              0, -1, 4),nrow=3,byrow=TRUE)
+print(A)
+B = c(9,8,7)
+print(B)
+itersolve(A, B, tol=1e-9 , method = "Gauss-Seidel")
 
 
 
