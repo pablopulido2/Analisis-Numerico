@@ -16,13 +16,13 @@ Modi=matrix(c(4,-1,-1,-1,
            -1,-1,-1,4),nrow=4,byrow=TRUE)
 print(Modi)
 E=Modi-A
-print(E)
+cat("error en la matriz: ",E)
 b=matrix(c(-exp(1),5,6,0),nrow = 4)
 cat(b)
 errorR=norm(E)/norm(A)
 print(errorR)
 condicion=norm(A)* norm(solve(A))
-print(condicion)
+cat("numero condicion: ",condicion)
 solve(A,b,tol=0.001)
 solve(Modi,b,tol=0.01)
 #cota<= condicion* abs|error relativo|
